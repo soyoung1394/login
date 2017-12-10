@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="false"
+    android:interpolator="@android:anim/linear_interpolator">
+    <rotate
+        android:duration="10000"
+        android:fromDegrees="0"
+        android:pivotX="17"
+        android:pivotY="344"
+        android:toDegrees="360"
+        android:startOffset="10"
+        android:repeatCount="infinite"
+
+        />
+</set>
+
