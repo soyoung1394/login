@@ -15,23 +15,25 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity {
+public class DisabledLoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_disabled);
+
 
         final EditText idText=(EditText)findViewById(R.id.idText);
         final EditText passwordText=(EditText)findViewById(R.id.passwordText);
+
         final Button loginBtn=(Button)findViewById(R.id.loginBtn);
         final TextView registerBtn=(TextView)findViewById(R.id.registerBtn);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerIntent=new Intent(LoginActivity.this,RegisterActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
+                Intent registerIntent=new Intent(DisabledLoginActivity.this,DisabledRegisterActivity.class);
+                DisabledLoginActivity.this.startActivity(registerIntent);
             }
         });
 
@@ -51,12 +53,12 @@ public class LoginActivity extends AppCompatActivity {
                             if(success){
                                 String userID=jsonResponse.getString("userID");
                                 String userPassword=jsonResponse.getString("userPassword");
-                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                Intent intent=new Intent(DisabledLoginActivity.this,DisabledMainActivity.class);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userPassword", userPassword);
-                                LoginActivity.this.startActivity(intent);
+                                DisabledLoginActivity.this.startActivity(intent);
                             }else{
-                                AlertDialog.Builder builder=new AlertDialog.Builder(LoginActivity.this);
+                                AlertDialog.Builder builder=new AlertDialog.Builder(DisabledLoginActivity.this);
                                 builder.setMessage("로그인에 실패하였습니다")
                                         .setNegativeButton("다시시도", null)
                                         .create()
@@ -68,9 +70,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 };
-                LoginRequest loginRequest=new LoginRequest(userID, userPassword, responseListener);
-                RequestQueue queue= Volley.newRequestQueue(LoginActivity.this);
-                queue.add(loginRequest);
+                DisabledLoginRequest disabledloginRequest=new DisabledLoginRequest(userID, userPassword, responseListener);
+                RequestQueue queue= Volley.newRequestQueue(DisabledLoginActivity.this);
+                queue.add(disabledloginRequest);
             }
 
         });
