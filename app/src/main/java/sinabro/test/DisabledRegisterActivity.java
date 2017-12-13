@@ -28,6 +28,25 @@ public class DisabledRegisterActivity extends AppCompatActivity {
         final EditText phoneText=(EditText)findViewById(R.id.phoneText);
         final EditText photo=(EditText)findViewById(R.id.photo);
         Button registerBtn=(Button)findViewById(R.id.registerBtn);
+        Button service=(Button)findViewById(R.id.service);
+        Button privacy=(Button)findViewById(R.id.privacy);
+
+        service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent serviceIntent=new Intent(DisabledRegisterActivity.this,ServiceActivity.class);
+                DisabledRegisterActivity.this.startActivity(serviceIntent);
+            }
+        });
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent privacyIntent=new Intent(DisabledRegisterActivity.this,PrivacyActivity.class);
+                DisabledRegisterActivity.this.startActivity(privacyIntent);
+            }
+        });
+
 
         registerBtn.setOnClickListener(new View.OnClickListener(){
             @Override

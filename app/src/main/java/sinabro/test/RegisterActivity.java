@@ -28,6 +28,25 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText phoneText=(EditText)findViewById(R.id.phoneText);
 
         Button registerBtn=(Button)findViewById(R.id.registerBtn);
+        Button service=(Button)findViewById(R.id.service);
+        Button privacy=(Button)findViewById(R.id.privacy);
+
+        service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent serviceIntent=new Intent(RegisterActivity.this,ServiceActivity.class);
+                RegisterActivity.this.startActivity(serviceIntent);
+            }
+        });
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent privacyIntent=new Intent(RegisterActivity.this,PrivacyActivity.class);
+                RegisterActivity.this.startActivity(privacyIntent);
+            }
+        });
+
 
         registerBtn.setOnClickListener(new View.OnClickListener(){
             @Override

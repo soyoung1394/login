@@ -16,9 +16,7 @@ public class SelectiveActivity extends AppCompatActivity {
         Button helperbtn=(Button)findViewById(R.id.helperbtn);
         Button disabledbtn=(Button)findViewById(R.id.disabledbtn);
 
-        Button service=(Button)findViewById(R.id.service);
-        Button privacy=(Button)findViewById(R.id.privacy);
-
+    
         helperbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
