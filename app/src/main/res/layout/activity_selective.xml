@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:id="@+id/activity_selective"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    android:gravity="center"
     tools:context="sinabro.test.SelectiveActivity">
-<Button
-    android:layout_width="100dp"
+<ImageView
+    android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:text="도우미로그인"
-    android:id="@+id/helperbtn" />
+    android:src="@drawable/selective"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+        android:text="도우미로그인"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:background="@drawable/round_helper"
+        android:id="@+id/helperbtn" />
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:background="@drawable/round_disabled"
         android:text="장애인로그인"
         android:id="@+id/disabledbtn" />
 </LinearLayout>

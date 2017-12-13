@@ -5,63 +5,138 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="sinabro.test.LoginActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin_right="10dp"/>
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="아이디"
-            />
-        <EditText
             android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:id="@+id/idText" />
+            android:layout_height="30dp"
+            android:text="서비스 이용약관에 동의합니다"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:textSize="15dp"
+            android:text="전체보기"
+            android:layout_marginRight="10dp"
+            android:id="@+id/service"/>
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <CheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin_right="10dp"/>
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="개인정보 수집 이용에 동의합니다."/>
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textSize="15dp"
+                android:text="전체보기"
+                android:layout_marginRight="10dp"
+                android:id="@+id/privacy"/>
+        </LinearLayout>
+
+
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp">
+
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="필수정보입력"
+            android:textColor="#1DBEC8"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="비밀번호"
-            />
-        <EditText
-            android:layout_width="200dp"
+            android:background="@drawable/textview"
+            android:layout_margin="5px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10px"
+                android:text="아이디"
+                />
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/idText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/passwordText" />
+            android:background="@drawable/textview"
+            android:layout_margin="5px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10px"
+                android:text="비밀번호"
+                />
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/passwordText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/textview"
+            android:layout_margin="5px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10px"
+                android:text="이름"
+                />
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/nameText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/textview"
+            android:layout_margin="5px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10px"
+                android:text="핸드폰번호"
+                />
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/phoneText" />
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="이름"
-            />
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:id="@+id/nameText" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="핸드폰번호"
-            />
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:id="@+id/phoneText" />
-    </LinearLayout>
+
 
     <Button
         android:layout_width="300dp"
