@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,6 +17,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DisabledRegisterActivity extends AppCompatActivity {
+
+    private AlertDialog dialog;
+    private boolean validate =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,63 @@ public class DisabledRegisterActivity extends AppCompatActivity {
             }
         });
 
+        final Button validateBtn=(Button) findViewById(R.id.validateBtn);
+        validateBtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                String userID=idText.getText().toString();
+                if(validate)
+                {
+                    return;
+                }
+                if(userID.equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DisabledRegisterActivity.this);
+                    dialog=builder.setMessage("아이디가 입력되지 않았습니다")
+                            .setPositiveButton("확인", null)
+                            .create();
+                    dialog.show();
+                    return;
+                }
+                Response.Listener<String> responseListener=new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response){
+
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(DisabledRegisterActivity.this);
+                                dialog=builder.setMessage("사용할 수 있는 아이디입니다")
+                                        .setPositiveButton("확인", null)
+                                        .create();
+                                dialog.show();
+                                idText.setEnabled(false);
+                                validate=true;
+                                idText.setBackgroundColor(getResources().getColor(R.color.colorGray));
+                                validateBtn.setBackgroundColor(getResources().getColor(R.color.colorGray));
+                            }
+                            else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(DisabledRegisterActivity.this);
+                                dialog= builder.setMessage("사용할 수 없는 아이디입니다..")
+                                        .setNegativeButton("확인", null)
+                                        .create();
+                                dialog .show();
+                            }
+                        }
+
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                };
+
+                DisabledValidateRequest disabledvalidateRequest = new DisabledValidateRequest(userID, responseListener);
+                RequestQueue queue= Volley.newRequestQueue(DisabledRegisterActivity.this);
+                queue.add(disabledvalidateRequest);
+            }
+        });
 
         registerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -60,12 +119,28 @@ public class DisabledRegisterActivity extends AppCompatActivity {
                 final String userName = nameText.getText().toString();
                 final String userPhone = phoneText.getText().toString();
                 final String userPhoto = photo.getText().toString();
+
+                if(!validate){
+                    AlertDialog.Builder builder=new AlertDialog.Builder(DisabledRegisterActivity.this);
+                    dialog=builder.setMessage("아이디 중복 검사를 해주세요")
+                            .setNegativeButton("확인", null)
+                            .create();
+                    dialog.show();
+                    return;
+                }
+                if (checkPrivacy.isChecked() == false || checkService.isChecked() == false || userID.equals("") || userPassword.equals("") || userName.equals("") || userPhone.equals("")){
+                    AlertDialog.Builder builder=new AlertDialog.Builder(DisabledRegisterActivity.this);
+                    dialog=builder.setMessage("약관에 동의를 하지 않았거나 입력되지 않은 내용이 있습니다.")
+                            .setNegativeButton("확인", null)
+                            .create();
+                    dialog.show();
+                    return;
+                }
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            if (checkPrivacy.isChecked() == true && checkService.isChecked() == true && userID.getBytes().length > 0&& userPassword.getBytes().length > 0&& userName.getBytes().length > 0&& userPhone.getBytes().length > 0)
-                            {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 boolean success = jsonResponse.getBoolean("success");
                                 if (success) {
@@ -83,10 +158,7 @@ public class DisabledRegisterActivity extends AppCompatActivity {
                                             .create()
                                             .show();
                                 }
-                            }else{
-                                Toast.makeText(DisabledRegisterActivity.this, "약관에 동의를 하지 않았거나 입력되지 않은 내용이 있습니다.", Toast.LENGTH_SHORT).show();
 
-                            }
                         }
                         catch (JSONException e) {
                             e.printStackTrace();
@@ -94,11 +166,20 @@ public class DisabledRegisterActivity extends AppCompatActivity {
                     }
 
                 };
-                DisabledRegisterRequest disabledregisterRequest = new DisabledRegisterRequest(userID, userPassword, userName, userPhone, userPhoto, responseListener);
+                DisabledRegisterRequest disabledregisterRequest = new DisabledRegisterRequest(userID,userPassword, userName, userPhone, userPhoto, responseListener);
                 RequestQueue disabledqueue= Volley.newRequestQueue(DisabledRegisterActivity.this);
                 disabledqueue.add(disabledregisterRequest);
             }
         });
 
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(dialog !=null);
+        {
+            dialog.dismiss();
+            dialog=null;
+        }
     }
 }
